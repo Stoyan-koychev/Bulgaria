@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Map, GoogleMapReact, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 
 
@@ -7,25 +7,21 @@ export class GoogleMaps extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      points: []
+      locations: []
     }
   }
 
-  savePoints = () => {
-    this.props.locations.map( obj => {
-      let points = [];
-      points.push(obj.position);
-      this.setState({ points });
-    });
+  componentDidMount() {
+    this.setState({ locations: this.props.locations })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({locations: nextProps.locations})
   }
 
   render () {
-
-    let bounds = new this.props.google.maps.LatLngBounds();
-    for (let i = 0; i < this.state.points.length; i++) {
-      bounds.extend(this.state.points[i])
-    }
-
+    console.log("MAP ")
+    console.log(this.state.locations)
     return (
       <Map 
         google={this.props.google} 
@@ -34,16 +30,15 @@ export class GoogleMaps extends Component {
           lng: 23.723127
         }} 
         zoom={7}
-        bounds={bounds}
       >
 
-        {this.props.locations.map( obj => (
+      {this.state.locations.map( obj => (
         <Marker 
           key={obj.id}
           position={obj.position}
           name={obj.name} 
         />
-        ))} 
+      ))} 
           
       </Map>
     );

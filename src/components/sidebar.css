@@ -28,25 +28,10 @@ h3 {
   padding: 5px 10px;
   font-size: 14px;
   border: 1px solid #b5b5b5;
-  border-radius: 40px 0px 0px 40px;
-  border-right: none;
-  width: 60%;
+  border-radius: 40px;
+  width: 100%;
 }
 
-.search-text-value {
-  border: none;
-  background-color: #0072ff;
-  font-size: 14px;
-  color: white;
-  border-radius: 0px 40px 40px 0px;
-  padding: 10px 20px;
-  width: 40%;
-}
-
-.search-text-value:hover {
-  cursor: pointer;
-  background-color: #005dd0;
-}
 
 .sidebar-places {
   padding: 0;

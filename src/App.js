@@ -8,11 +8,34 @@ import './components/sidebar.css';
 import GoogleMaps from './components/map.js'
 import './App.css';
 
+import escapeRegExp from 'escape-string-regexp';
+
 class App extends Component {
 constructor(props) {
   super(props);
   this.state = {
+    query: '',
     locations: []
+  }
+  this.updateQuery = this.updateQuery.bind(this);
+}
+
+updateQuery = (query) => {
+  this.setState({ query })
+  if(query){
+    let locations = [];
+    let filtered = [];
+    let expression =  new RegExp(escapeRegExp(this.state.query), 'i');
+    locations.push(...LocationsData);
+
+    locations.map( location => {
+      if(location.city_name.search(expression) !== -1){
+        filtered.push(location);
+        this.setState({ locations: filtered });
+      }
+    })
+  }else{
+    this.addLocations();
   }
 }
 
@@ -20,17 +43,24 @@ componentDidMount() {
   this.addLocations();
 }
 
+
 addLocations = () => {
   let locations = [];
   locations.push(...LocationsData);
   this.setState({locations: locations})
 }
 
+
   render() {
     return (
       <div>
-        <Sidebar names={this.state.locations}/>
-        <GoogleMaps locations={this.state.locations}/>
+        <Sidebar 
+          locations={ this.state.locations }
+          updateQuery={ this.updateQuery }
+        />
+        <GoogleMaps 
+          locations={ this.state.locations } 
+        />
       </div>
     );
   }
