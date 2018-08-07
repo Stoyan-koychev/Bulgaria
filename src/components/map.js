@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 
 
@@ -36,7 +36,8 @@ export class GoogleMaps extends Component {
       >
 
       {this.state.locations.map( obj => (
-        <Marker 
+        <Marker
+          title={obj.city_name}
           key={obj.id}
           position={obj.position}
           name={obj.city_name}

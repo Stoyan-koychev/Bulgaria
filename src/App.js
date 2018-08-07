@@ -120,6 +120,7 @@ checkMobile = () => {
             closeModal={ this.closeModal }
             wikipediaData={ this.wikipediaData }
             data={ this.state.wikiData }
+            isModalOpen={ this.state.isModalOpen }
           />
         }
         

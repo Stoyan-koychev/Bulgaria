@@ -22,7 +22,10 @@ class InfoModal extends Component {
       <div className='info-modal'>
         <div className='modal-head'>
             <h1 className='info-title'>{ this.props.name.city_name }</h1>
-            <button className='close' onClick={ this.props.closeModal }>
+            <button 
+                className='close' onClick={ this.props.closeModal }
+                tabIndex={this.props.isModalOpen ? 0 : -1}
+                aria-label='close modal'>
                 Close
             </button>
         </div>
