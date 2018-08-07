@@ -23,7 +23,7 @@ class InfoModal extends Component {
         <div className='modal-head'>
             <h1 className='info-title'>{ this.props.name.city_name }</h1>
             <button className='close' onClick={ this.props.closeModal }>
-                Hide
+                Close
             </button>
         </div>
         <div className='info-holder' dangerouslySetInnerHTML={{__html: this.props.data}}></div>

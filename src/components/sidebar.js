@@ -3,8 +3,13 @@ import React, { Component } from 'react';
 class Sidebar extends Component {
   render() {
     return (
-      <div className='sidebar'>
-      <h3>Find City</h3>
+      <div className={`sidebar ${this.props.isSidebarOpen ? 'show' : 'hide' }`}>
+      <div className='sidebar-title'>
+        <h3>Find City</h3>
+        <button onClick={() => this.props.toggleSidebar()}>
+          {`${this.props.isSidebarOpen ? 'Hide' : 'Show' }`}
+        </button>
+      </div>
         <div className='search-field'>
           <input
             className='search-text'

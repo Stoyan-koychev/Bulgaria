@@ -20,6 +20,7 @@ constructor(props) {
     query: '',
     locations: [],
     isModalOpen: false,
+    isSidebarOpen: true,
     selectedCity: {},
     wikiData: ''
   }
@@ -27,6 +28,7 @@ constructor(props) {
   this.openModal = this.openModal.bind(this);
   this.closeModal = this.closeModal.bind(this);
   this.wikipediaData = this.wikipediaData.bind(this);
+  this.toggleSidebar = this.toggleSidebar.bind(this);
 }
 
 
@@ -84,6 +86,12 @@ closeModal = () => {
   this.setState({ isModalOpen: false });
 }
 
+toggleSidebar = () => {
+  this.setState(prevState => ({
+    isSidebarOpen: !prevState.isSidebarOpen
+  }))
+}
+
   render() {
     return (
       <div>
@@ -95,11 +103,15 @@ closeModal = () => {
             data={ this.state.wikiData }
           />
         }
-        <Sidebar 
-          locations={ this.state.locations }
-          updateQuery={ this.updateQuery }
-          openModal={ this.openModal }
-        />
+        
+          <Sidebar
+            locations={ this.state.locations }
+            updateQuery={ this.updateQuery }
+            openModal={ this.openModal }
+            isSidebarOpen={ this.state.isSidebarOpen }
+            toggleSidebar={ this.toggleSidebar }
+          /> 
+        
         <GoogleMaps 
           locations={ this.state.locations }
           openModal={ this.openModal }
