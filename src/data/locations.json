@@ -33,14 +33,6 @@
       },
     {
           "id": "005",
-          "city_name": "Ruse",
-          "position": {
-              "lat": 43.8486376,
-              "lng": 25.9455752
-          }
-      },
-    {
-          "id": "006",
           "city_name": "Vidin",
           "position": {
               "lat": 43.9863577,
@@ -48,7 +40,7 @@
           }
       },
     {
-          "id": "007",
+          "id": "006",
           "city_name": "Blagoevgrad",
           "position": {
               "lat": 42.0204361,
@@ -56,7 +48,7 @@
           }
       },
     {
-          "id": "008",
+          "id": "007",
           "city_name": "Stara Zagora",
           "position": {
               "lat": 42.4294537,
@@ -64,7 +56,7 @@
           }
       },
     {
-          "id": "009",
+          "id": "008",
           "city_name": "Veliko Tarnovo",
           "position": {
               "lat": 43.0798055,
@@ -72,7 +64,7 @@
           }
       },
     {
-          "id": "010",
+          "id": "009",
           "city_name": "Pleven",
           "position": {
               "lat": 43.4078046,
@@ -80,15 +72,7 @@
           }
       },
     {
-          "id": "011",
-          "city_name": "Montana",
-          "position": {
-              "lat": 43.4086623,
-              "lng": 23.2148247
-          }
-      },
-    {
-          "id": "012",
+          "id": "010",
           "city_name": "Sliven",
           "position": {
               "lat": 42.6795625,
@@ -96,7 +80,7 @@
           }
       },
     {
-          "id": "013",
+          "id": "011",
           "city_name": "Smolyan",
           "position": {
               "lat": 41.5778576,
@@ -104,7 +88,7 @@
           }
       },
     {
-          "id": "014",
+          "id": "012",
           "city_name": "Svilengrad",
           "position": {
               "lat": 41.7666749,

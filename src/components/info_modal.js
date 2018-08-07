@@ -17,16 +17,11 @@ class InfoModal extends Component {
         this.props.wikipediaData(this.props.name.city_name);
     }
 
-    // updateContent = () => {
-    //     const wrapper = document.querySelector('.info-holder');
-    //     wrapper.appendChild(this.state.content);
-    // }
-
   render() {  
     return (
       <div className='info-modal'>
         <div className='modal-head'>
-            <h3>{ this.props.name.city_name }</h3>
+            <h1 className='info-title'>{ this.props.name.city_name }</h1>
             <button className='close' onClick={ this.props.closeModal }>
                 Hide
             </button>
