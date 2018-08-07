@@ -1,7 +1,28 @@
 import React, { Component } from 'react';
 
 class InfoModal extends Component {
-  render() {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            content: ''
+        }
+    }
+
+    componentDidMount() {
+        this.props.wikipediaData(this.props.name.city_name);
+    }
+
+    componentWillUpdate() {
+        this.props.wikipediaData(this.props.name.city_name);
+    }
+
+    // updateContent = () => {
+    //     const wrapper = document.querySelector('.info-holder');
+    //     wrapper.appendChild(this.state.content);
+    // }
+
+  render() {  
     return (
       <div className='info-modal'>
         <div className='modal-head'>
@@ -10,6 +31,7 @@ class InfoModal extends Component {
                 Hide
             </button>
         </div>
+        <div className='info-holder' dangerouslySetInnerHTML={{__html: this.props.data}}></div>
       </div>
     );
   }

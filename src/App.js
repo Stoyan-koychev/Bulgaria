@@ -4,10 +4,9 @@ import * as LocationsData from './data/locations.json'
 //Sidebar
 import Sidebar from './components/sidebar.js';
 import './components/sidebar.css';
-
+//Info Modal
 import InfoModal from './components/info_modal.js';
 import './components/infomodal.css';
-
 //Google Map
 import GoogleMaps from './components/map.js'
 import './App.css';
@@ -21,11 +20,13 @@ constructor(props) {
     query: '',
     locations: [],
     isModalOpen: false,
-    selectedCity: {}
+    selectedCity: {},
+    wikiData: ''
   }
   this.updateQuery = this.updateQuery.bind(this);
   this.openModal = this.openModal.bind(this);
   this.closeModal = this.closeModal.bind(this);
+  this.wikipediaData = this.wikipediaData.bind(this);
 }
 
 
@@ -56,14 +57,27 @@ componentDidMount() {
 addLocations = () => {
   let locations = [];
   locations.push(...LocationsData);
-  this.setState({locations: locations})
+  this.setState({locations: locations});
 }
 
 openModal = (object) => {
   if(this.state.selectedCity.length === undefined){
-    this.setState({ selectedCity: object })
-    this.setState({ isModalOpen: true })
+    this.setState({ selectedCity: object });
+    this.setState({ isModalOpen: true });
   }
+}
+
+wikipediaData = (query) => {
+  let info;
+  let wikiLink = `https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&prop=extracts&titles=${query}`;
+  fetch(wikiLink).then(res => {
+    return res.json()
+  }).then(data => {
+    info = data.query.pages[Object.keys(data.query.pages)[0]].extract;
+    this.setState({ wikiData: info });
+  }).catch(error => {
+    console.log('There was errow fetchind data from wiki '+ error)
+  })
 }
 
 closeModal = () => {
@@ -77,6 +91,8 @@ closeModal = () => {
           <InfoModal 
             name={this.state.selectedCity}
             closeModal={ this.closeModal }
+            wikipediaData={ this.wikipediaData }
+            data={ this.state.wikiData }
           />
         }
         <Sidebar 
