@@ -43,3 +43,11 @@
 .info-modal .close:hover {
  cursor: pointer;
 }
+
+@media screen and (max-width: 500px) {
+    .info-modal {
+      width: calc(100vw - 60px);
+      height: calc(100vh - 155px);
+      margin-top: 110px;
+    }
+  }

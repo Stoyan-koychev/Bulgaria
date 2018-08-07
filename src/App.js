@@ -21,6 +21,7 @@ constructor(props) {
     locations: [],
     isModalOpen: false,
     isSidebarOpen: true,
+    isMobile: false,
     selectedCity: {},
     wikiData: ''
   }
@@ -29,6 +30,7 @@ constructor(props) {
   this.closeModal = this.closeModal.bind(this);
   this.wikipediaData = this.wikipediaData.bind(this);
   this.toggleSidebar = this.toggleSidebar.bind(this);
+  this.checkMobile = this.checkMobile.bind(this);
 }
 
 
@@ -53,8 +55,8 @@ updateQuery = (query) => {
 
 componentDidMount() {
   this.addLocations();
+  this.checkMobile();
 }
-
 
 addLocations = () => {
   let locations = [];
@@ -92,9 +94,26 @@ toggleSidebar = () => {
   }))
 }
 
+checkMobile = () => {
+  let width = window.innerWidth;
+  if(width < 650){
+    this.setState(prevState => ({
+      isMobile: !prevState.isMobile
+    }))
+  }
+}
+
   render() {
     return (
       <div>
+        <Sidebar
+          locations={ this.state.locations }
+          updateQuery={ this.updateQuery }
+          openModal={ this.openModal }
+          isSidebarOpen={ this.state.isSidebarOpen }
+          toggleSidebar={ this.toggleSidebar }
+        />
+
         {(this.state.isModalOpen) && 
           <InfoModal 
             name={this.state.selectedCity}
@@ -103,14 +122,6 @@ toggleSidebar = () => {
             data={ this.state.wikiData }
           />
         }
-        
-          <Sidebar
-            locations={ this.state.locations }
-            updateQuery={ this.updateQuery }
-            openModal={ this.openModal }
-            isSidebarOpen={ this.state.isSidebarOpen }
-            toggleSidebar={ this.toggleSidebar }
-          /> 
         
         <GoogleMaps 
           locations={ this.state.locations }

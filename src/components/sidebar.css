@@ -7,7 +7,6 @@ h3 {
   z-index: 10;
   margin: 15px;
   width: 300px;
-  height: calc(100vh - 30px);
   background-color: #fff;
   display: block;
   position: absolute;
@@ -15,14 +14,15 @@ h3 {
   border-radius: 10px;
   box-shadow: 0px 0px 50px #0000004f;
   overflow: scroll;
-  transition: .2s margin-left ease-in-out;
+  transition: .2s all ease-in-out;
 }
 
 .hide {
-  margin-left: -220px;
+  height: 80px;
 }
+
 .show {
-  margin-left: 15px; 
+  height: calc(100vh - 30px);
 }
 
 .search-field {
@@ -86,4 +86,25 @@ h3 {
 }
 .sidebar-title button:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .sidebar {
+    width: calc(100vw - 30px);
+  }
+
+  .search-text {
+    padding: 15px 10px;
+  }
+
+  .hide {
+    height: 80px;
+    margin-left: none !important;
+    overflow: hidden;
+  }
+
+  .show {
+    height: calc(100vh - 30px);
+    overflow: scroll;
+  }
 }
