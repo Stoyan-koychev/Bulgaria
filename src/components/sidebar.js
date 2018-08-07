@@ -16,7 +16,12 @@ class Sidebar extends Component {
         </div>
         <ul className='sidebar-places'>
           {this.props.locations.map( obj => (
-            <li className='sidebar-list' key={obj.id}> {obj.city_name} </li>
+            <li className='sidebar-list' 
+              key={obj.id}
+              onClick={() => (this.props.openModal(obj))}
+            > 
+              {obj.city_name} 
+            </li>
           ))}
         </ul>
       </div>

@@ -7,7 +7,8 @@ export class GoogleMaps extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      locations: []
+      locations: [],
+      isOpen: true
     }
   }
 
@@ -19,9 +20,11 @@ export class GoogleMaps extends Component {
     this.setState({locations: nextProps.locations})
   }
 
+  toggle = () => {
+    this.setState({isOpen: !this.state.isOpen}) 
+  }
+
   render () {
-    console.log("MAP ")
-    console.log(this.state.locations)
     return (
       <Map 
         google={this.props.google} 
@@ -36,7 +39,8 @@ export class GoogleMaps extends Component {
         <Marker 
           key={obj.id}
           position={obj.position}
-          name={obj.name} 
+          name={obj.city_name}
+          onClick={() => {this.props.openModal(obj)}}
         />
       ))} 
           
