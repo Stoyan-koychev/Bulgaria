@@ -8,6 +8,8 @@ Build whit React.
 ## Table of Contents
 * Overview
 * How to Run The Application
+* Offline Use
+* Design
 * Contributing
 
 ## Overview
@@ -22,7 +24,7 @@ Project made with React and bootstraped from [`create-react-app`](https://github
 * Start the development server with `npm start`
 * Visit the site: `http://localhost:3000`
 
-## Offline use
+## Offline Use
 By default, the `create-react-app` includes a service worker in the production build.
 To check it run `npm run serve` and then visit `localhost:5000`.
 
