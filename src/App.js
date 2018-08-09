@@ -23,7 +23,9 @@ constructor(props) {
     isSidebarOpen: true,
     isMobile: false,
     selectedCity: {},
-    wikiData: ''
+    wikiData: '',
+    isGoogleLoaded: true,
+    isWikiLoaded: true
   }
   this.updateQuery = this.updateQuery.bind(this);
   this.openModal = this.openModal.bind(this);
@@ -56,6 +58,7 @@ updateQuery = (query) => {
 componentDidMount() {
   this.addLocations();
   this.checkMobile();
+  this.isMapsLoaded();
 }
 
 addLocations = () => {
@@ -64,11 +67,11 @@ addLocations = () => {
   this.setState({locations: locations});
 }
 
-openModal = (object) => {
-  if(this.state.selectedCity.length === undefined){
-    this.setState({ selectedCity: object });
-    this.setState({ isModalOpen: true });
-  }
+openModal = object => {
+  this.setState({ 
+    selectedCity: object,
+    isModalOpen: true
+   });
 }
 
 wikipediaData = (query) => {
@@ -79,13 +82,20 @@ wikipediaData = (query) => {
   }).then(data => {
     info = data.query.pages[Object.keys(data.query.pages)[0]].extract;
     this.setState({ wikiData: info });
+    this.setState({ isWikiLoaded: true });
   }).catch(error => {
-    console.log('There was errow fetchind data from wiki '+ error)
+    info = '<h2>Something went wrong</h2><p>please try again later</p>'
+    this.setState({ wikiData: info });
+    this.setState({ isWikiLoaded: false });
+    console.log('There was errow fetchind data from wiki '+ error);
   })
 }
 
 closeModal = () => {
-  this.setState({ isModalOpen: false });
+  this.setState({ 
+    selectedCity: {},
+    isModalOpen: false }
+  );
 }
 
 toggleSidebar = () => {
@@ -101,6 +111,15 @@ checkMobile = () => {
       isMobile: !prevState.isMobile
     }))
   }
+}
+
+isMapsLoaded = () => {
+  setTimeout(() => {
+    const map = document.querySelector('iframe');
+    if (!map) {
+      this.setState({ isGoogleLoaded: false })
+    }
+  }, 4000);
 }
 
   render() {
@@ -123,11 +142,19 @@ checkMobile = () => {
             isModalOpen={ this.state.isModalOpen }
           />
         }
-        
-        <GoogleMaps 
-          locations={ this.state.locations }
-          openModal={ this.openModal }
-        />
+
+        {this.state.isGoogleLoaded ? (
+          <GoogleMaps 
+            locations={ this.state.locations }
+            openModal={ this.openModal }
+            selectedCity={this.state.selectedCity}
+          />
+        ) : (
+          <div className="isNotLoaded">
+            <h2>Something went wrong</h2>
+            <p>please try again later</p>
+          </div>
+        )}
       </div>
     );
   }

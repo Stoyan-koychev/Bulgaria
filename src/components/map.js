@@ -6,6 +6,7 @@ export class GoogleMaps extends Component {
     super(props);
     this.state = {
       locations: [],
+      isSelected: false,
       isOpen: true
     }
   }
@@ -34,15 +35,28 @@ export class GoogleMaps extends Component {
       >
 
       {this.state.locations.map( obj => (
-        <Marker
-          title={obj.city_name}
-          key={obj.id}
-          position={obj.position}
-          name={obj.city_name}
-          onClick={() => {this.props.openModal(obj)}}
-        />
+        obj !== this.props.selectedCity && (
+          <Marker
+            title={ obj.city_name }
+            key={ obj.id }
+            position={ obj.position }
+            name={ obj.city_name }
+            onClick={ () => this.props.openModal(obj) }
+          />)
       ))} 
-          
+      
+      {this.state.locations.map( obj => (
+        obj === this.props.selectedCity && (
+        <Marker
+          title={ this.props.selectedCity.city_name }
+          key={ this.props.selectedCity.id }
+          position={ this.props.selectedCity.position }
+          name={ this.props.selectedCity.city_name }
+          onClick={ () => this.props.openModal(this.props.selectedCity) }
+          animation={ global.google.maps.Animation.BOUNCE }
+        />)
+      ))}
+      
       </Map>
     );
   }

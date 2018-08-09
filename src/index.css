@@ -3,3 +3,8 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.isNotLoaded {
+  text-align:  center;
+  padding-top: 35vh;
+}
