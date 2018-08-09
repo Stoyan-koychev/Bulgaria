@@ -35,7 +35,7 @@ constructor(props) {
   this.checkMobile = this.checkMobile.bind(this);
 }
 
-
+// Take an set the typed query by the user as current state.
 updateQuery = (query) => {
   this.setState({ query })
   if(query){
@@ -44,6 +44,8 @@ updateQuery = (query) => {
     let expression =  new RegExp(escapeRegExp(this.state.query), 'i');
     locations.push(...LocationsData);
 
+    // Check if the searched query match any of the names in the array.
+    // If there are any matches set the locations with the filtered ones.
     locations.map( location => {
       if(location.city_name.search(expression) !== -1){
         filtered.push(location);
@@ -51,6 +53,7 @@ updateQuery = (query) => {
       }
     })
   }else{
+    // If the input is empty. Sets the state with all locations.
     this.addLocations();
   }
 }
@@ -61,19 +64,22 @@ componentDidMount() {
   this.isMapsLoaded();
 }
 
+// Sets the state with all locations.
 addLocations = () => {
   let locations = [];
   locations.push(...LocationsData);
   this.setState({locations: locations});
 }
 
-openModal = object => {
+// Set the selected city and opens the modal with the selected city.
+openModal = (object) => {
   this.setState({ 
     selectedCity: object,
     isModalOpen: true
    });
 }
 
+// Fetch data from Wikipedia.
 wikipediaData = (query) => {
   let info;
   let wikiLink = `https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&prop=extracts&titles=${query}`;
@@ -91,6 +97,7 @@ wikipediaData = (query) => {
   })
 }
 
+// Empty the selected city and closes the modal.
 closeModal = () => {
   this.setState({ 
     selectedCity: {},
@@ -98,12 +105,15 @@ closeModal = () => {
   );
 }
 
+// Toggle the sidebar based on the previous state.
 toggleSidebar = () => {
   this.setState(prevState => ({
     isSidebarOpen: !prevState.isSidebarOpen
   }))
 }
 
+// Checks the width of the window.
+// If it is under 650px set the state to mobile.
 checkMobile = () => {
   let width = window.innerWidth;
   if(width < 650){
@@ -113,6 +123,7 @@ checkMobile = () => {
   }
 }
 
+// Check if google maps loads.
 isMapsLoaded = () => {
   setTimeout(() => {
     const map = document.querySelector('iframe');
@@ -158,6 +169,7 @@ isMapsLoaded = () => {
       </div>
     );
   }
+
 }
 
 export default App;
